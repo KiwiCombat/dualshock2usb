@@ -7,3 +7,4 @@ FEATURES:<br>
 -Wireless controller<br>
 -Proper rumble support<br>
 -Compact<br>
+-Xinput (Unsure of Linux support)
