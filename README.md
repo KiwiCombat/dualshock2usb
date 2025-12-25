@@ -5,6 +5,6 @@ We are designin this custom adapter becuase the generic adapters lack desirable 
 FEATURES:<br>
 -Analogue triggers<br>
 -Wireless controller ?<br>
--Proper rumble support<br>
+-Rumble<br>
 -Compact<br>
 -Xinput (Unsure of Linux support)
