@@ -15,24 +15,32 @@ const boolean UseTriggerButtons = false;
 
 const int ADC_Max = 1023;
 
-//#define DIGITALSTATE1 PSB_CROSS //<--- maybe not needed
-
-//buton
+//buttom
 const int Pin_ButtonA = PSB_CROSS; //PSB_CROSS
 const int Pin_ButtonB = PSB_CIRCLE;
 const int Pin_ButtonX = PSB_SQUARE;
 const int Pin_ButtonY = PSB_TRIANGLE;
-const int
+const int Pin_ButtonLB = PSB_L1;
+const int Pin_ButtonRB = PSB_R1;
+const int Pin_ButtonL3 = PSB_L3;
+const int Pin_buttonR3 = PSB_R3;
+const int Pin_ButtonBack = PSB_SELECT;
+const int Pin_ButtonStart = PSB_START;
+const int Pin_DpadUp = PSB_PAD_UP;
+const int Pin_DpadDown = PSB_PAD_DOWN;
+const int Pin_DpadLeft = PSB_PAD_LEFT;
+const int Pin_DpadRight = PSB_PAD_RIGHT;
 
 //stick pins
-const int Pin_RightJoyX = PSS_RX; //PSS_RX
-const int Pin_RightJoyY = PSS_RY; //PSS_RY
-const int Pin_LeftJoyX = PSS_LX; //PSS_LX
-const int Pin_LeftJoyY = PSS_LY; //PSS_LY
+const int Pin_RightJoyX = PSS_RX;
+const int Pin_RightJoyY = PSS_RY;
+const int Pin_LeftJoyX = PSS_LX;
+const int Pin_LeftJoyY = PSS_LY;
 
 //trigure pin?
 const int Pin_TriggerL = PSAB_L2; //PSAB - analog button output
-const int Pin_TriggerL = PSAB_R2;
+const int Pin_TriggerR = PSAB_R2;
+
 
 const int NumButtons = 14;
 const int Buttons[NumButtons] = {
@@ -108,6 +116,28 @@ if (error == 0)
 //guitar hero controller type not present because ion wanna do allat
 }
 
+
+void rumbleCallback(uint8_t packetType) {
+  
+  //big motor rumble
+  if (packetType == (uint8_t) XInputReceiveType::Rumble) {
+    uint8_t rumbleValue = XInput.getRumbleLeft();
+    analogWrite(A2, rumbleValue);
+    }
+    //small motor rumble
+    uint8_t rumbleR = XInput.getRumbleRight();
+      if (rumbleR > 0) {
+        bool rr = true;
+        ps2x.read_gamepad(rr, A2);
+      }
+      else {
+        bool rr = false;
+        ps2x.read_gamepad(rr, A2);
+      }
+//XInput.send();
+}
+
+
 void loop() {
 
   /* You must Read Gamepad to get new values and set vibration values
@@ -115,20 +145,67 @@ void loop() {
      if you don't enable the rumble, use ps2x.read_gamepad(); with no values
      You should call this at least once a second
    */ 
+//skip if error
 if(error == 1)
   return;
 
-ps2x.read_gamepad();
+ps2x.read_gamepad(); //moved stuff but probably wont work but it doesnt give me errors
 
-if(ps2x.Button(PSB_CROSS))
-  XInput.press(BUTTON_A);
+  boolean buttonA = digitalRead(Pin_ButtonA);
+	boolean buttonB = digitalRead(Pin_ButtonB);
+	boolean buttonX = digitalRead(Pin_ButtonX);
+	boolean buttonY = digitalRead(Pin_ButtonY);
 
+	boolean buttonLB = digitalRead(Pin_ButtonLB);
+	boolean buttonRB = digitalRead(Pin_ButtonRB);
+
+	boolean buttonBack  = digitalRead(Pin_ButtonBack);
+	boolean buttonStart = digitalRead(Pin_ButtonStart);
+
+	boolean buttonL3 = digitalRead(Pin_ButtonL3);
+	boolean buttonR3 = digitalRead(Pin_buttonR3);
+
+	boolean dpadUp    = digitalRead(Pin_DpadUp);
+	boolean dpadDown  = digitalRead(Pin_DpadDown);
+	boolean dpadLeft  = digitalRead(Pin_DpadLeft);
+	boolean dpadRight = digitalRead(Pin_DpadRight);
+
+	XInput.setButton(BUTTON_A, buttonA);
+	XInput.setButton(BUTTON_B, buttonB);
+	XInput.setButton(BUTTON_X, buttonX);
+	XInput.setButton(BUTTON_Y, buttonY);
+
+	XInput.setButton(BUTTON_LB, buttonLB);
+	XInput.setButton(BUTTON_RB, buttonRB);
+
+	XInput.setButton(BUTTON_BACK, buttonBack);
+	XInput.setButton(BUTTON_START, buttonStart);
+
+	XInput.setButton(BUTTON_L3, buttonL3);
+	XInput.setButton(BUTTON_R3, buttonR3);
+
+  XInput.setDpad(dpadUp, dpadDown, dpadLeft, dpadRight);
+
+  int trigleftt = analogRead(Pin_TriggerL);
+  int trigright = analogRead(Pin_TriggerR);
+  XInput.setTrigger(TRIGGER_LEFT, trigleftt);
+  XInput.setTrigger(TRIGGER_RIGHT, trigright);
+
+  int rJX = analogRead(Pin_RightJoyX);
+  int rJY = analogRead(Pin_RightJoyY);
+  XInput.setJoystickX(JOY_RIGHT, rJX);
+  XInput.setJoystickY(JOY_RIGHT, rJY);
+
+  int lJX = analogRead(Pin_LeftJoyX);
+  int lJY = analogRead(Pin_LeftJoyY);
+  XInput.setJoystickX(JOY_LEFT, lJX);
+  XInput.setJoystickY(JOY_LEFT, lJY);
+
+//const int RumbleLeft = A2;
+//vibrate = A2;
+//if(ps2x.Button(PSB_CROSS))
+//  XInput.press(BUTTON_A);
+
+  XInput.send();
 }
 
-void rumbleCallback(uint8_t packetType) {
-  
-  if (packetType == (uint8_t) XInputReceiveType::Rumble) {
-    uint8_t rumbleValue = XInput.getRumbleLeft() | XInput.getRumbleRight();
-    analogWrite(A2, rumbleValue);
-  }
-}
