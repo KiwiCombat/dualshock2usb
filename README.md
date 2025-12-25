@@ -1,6 +1,6 @@
-CUSTOM ADAPTER FOR PS2 CONTROLLER<br>
+# dualshock2usb<br>
 <br>
-We are designin this custom adapter becuase the generic adapters lack desirable and barely use all of the ps2 controlelrs features. <br>
+dualshock2usb is a project that will enable the use of DualShock 2 controllers on windows via an Arduino and XInput <br>
 <br>
 FEATURES:<br>
 -Analogue triggers<br>
