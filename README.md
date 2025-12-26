@@ -21,6 +21,7 @@ one 10kohm resistor on the 5v pin (the ps2 controller runs at ~3.3v)
 </p>
 
 Controller	 Arduino<br>
+<br>
 Pin 1(Data)->Pin 10<br>
 Pin 2(Command)->Pin 12<br>
 Pin 3(motor power)->7.5-9v<br>
