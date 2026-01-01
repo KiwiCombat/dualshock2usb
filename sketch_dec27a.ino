@@ -38,36 +38,6 @@ const int ADC_Max = 1023;
 
 boolean haveController = false;
 
-/*buttom
-const int Pin_ButtonA = PSB_CROSS; //PSB_CROSS
-const int Pin_ButtonB = PSB_CIRCLE;
-const int Pin_ButtonX = PSB_SQUARE;
-const int Pin_ButtonY = PSB_TRIANGLE;
-const int Pin_ButtonLB = PSB_L1;
-const int Pin_ButtonRB = PSB_R1;
-const int Pin_ButtonL3 = PSB_L3;
-const int Pin_buttonR3 = PSB_R3;
-const int Pin_ButtonBack = PSB_SELECT;
-const int Pin_ButtonStart = PSB_START;
-const int Pin_DpadUp = PSB_PAD_UP;
-const int Pin_DpadDown = PSB_PAD_DOWN;
-const int Pin_DpadLeft = PSB_PAD_LEFT;
-const int Pin_DpadRight = PSB_PAD_RIGHT;
-
-//stick pins
-const int Pin_RightJoyX = PSS_RX;
-const int Pin_RightJoyY = PSS_RY;
-const int Pin_LeftJoyX = PSS_LX;
-const int Pin_LeftJoyY = PSS_LY;
-
-//trigure pin?
-const int Pin_TriggerL = PSAB_L2; //PSAB - analog button output
-const int Pin_TriggerR = PSAB_R2;
-
-//NOT NEEDED????
-
-*/
-
 const int NumButtons = 14;
 const int Buttons[NumButtons] = {
   BUTTON_A,
@@ -86,22 +56,7 @@ const int Buttons[NumButtons] = {
   DPAD_RIGHT,
 };
 
-//not needed anymore
-/*#define PS2_DAT 9
-#define PS2_CMD 12
-#define PS2_SEL 10
-#define PS2_CLK 11
-#define pressures true
-#define rumble true
-*/
-
-
 PsxControllerBitBang<10, 12, 9, 11> psx, psxCtrl;  //PIN_PS2_ATT, PIN_PS2_CMD, PIN_PS2_DAT, PIN_PS2_CLK
-
-//these just stop all the errors idk they're in the example sketch too
-int error = 0;
-byte type = 0;
-byte vibrate = 0;
 
 void setup() {
   Serial.begin(57600);
@@ -128,7 +83,6 @@ void rumbleCallback(uint8_t packetType) {
     bool rr = false;
     psxCtrl.setRumble(0x00, 0x00);
   }
-  //XInput.send(); //these ps2x.read gamepad might not work
 }
 
 void loop() {
