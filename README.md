@@ -4,15 +4,15 @@ dualshock2usb is a project that will enable the use of DualShock 2 controllers o
 
 ### Features
 
-* Analogue triggers. (the DualShock 2 has analog buttons)
+* Analogue triggers
 
 ~~-Wireless controller ?~~
 
-* Full big/small motor rumble support thanks to the ArduinoXInput library.
+* Full big/small motor rumble support
 
-* Possibly a custom adapter, which will be much sleeker and compact than a bare arduino and jumper wires.
+* Possibly a custom adapter
 
-* Based on the XInput API, ensuring compatability with many systems and games.
+* Based on the XInput API
 
 ### Wiring
 
