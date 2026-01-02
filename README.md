@@ -32,4 +32,5 @@ Pin 7(clock)->Pin 11<br>
 
 ## Dependencies
 ps2duino.ino uses the [Arduino-PS2X](https://github.com/madsci1016/Arduino-PS2X) and [ArduinoXInput](https://github.com/dmadison/ArduinoXInput) Libraries, while dualshock2usb.ino makes use of the [PsxNewLib](https://github.com/SukkoPera/PsxNewLib) library instead of PS2X.
+
 dualshock2usbESP.ino uses the [PS2X-ESP32](https://github.com/MyArduinoLib/Arduino-PS2X-ESP32) Library.
