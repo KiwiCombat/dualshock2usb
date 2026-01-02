@@ -17,7 +17,9 @@ dualshock2usb is a project that will enable the use of DualShock 2 controllers o
 ### Wiring
 
 <p>You will need 
-one 10kohm resistor on the 5v pin (the ps2 controller runs at ~3.3v)
+one 10kohm resistor on the 5v pin 
+OR you could connect the controller directly to the 3.3v pin (reccomended)<br>
+the best solution is to use a 3.3v arduino, otherwise you will need resistors/ level shifting on *all* of the pins
 </p>
 
 Controller	 Arduino<br>
