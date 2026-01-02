@@ -174,7 +174,7 @@ if(error == 1)
 
 ps2x.read_gamepad(); //moved stuff but probably wont work but it doesnt give me errors
 
-  boolean buttonA = digitalRead(Pin_ButtonA);
+  boolean buttonA = digitalRead(PSB_CROSS); //i dont think i need to make 16 billion differnt consts if setting buttonA to the ps2x button directly will work
 	boolean buttonB = digitalRead(Pin_ButtonB);
 	boolean buttonX = digitalRead(Pin_ButtonX);
 	boolean buttonY = digitalRead(Pin_ButtonY);
@@ -193,7 +193,7 @@ ps2x.read_gamepad(); //moved stuff but probably wont work but it doesnt give me 
 	boolean dpadLeft  = digitalRead(Pin_DpadLeft);
 	boolean dpadRight = digitalRead(Pin_DpadRight);
 
-	XInput.setButton(BUTTON_A, buttonA);
+	XInput.setButton(BUTTON_A, buttonA); //maybe i could even move PSB_CROSS to here, but i cant test this yet
 	XInput.setButton(BUTTON_B, buttonB);
 	XInput.setButton(BUTTON_X, buttonX);
 	XInput.setButton(BUTTON_Y, buttonY);
