@@ -38,5 +38,5 @@ ps2duino.ino uses the [Arduino-PS2X](https://github.com/madsci1016/Arduino-PS2X)
 dualshock2usbESP.ino uses the [PS2X-ESP32](https://github.com/MyArduinoLib/Arduino-PS2X-ESP32) Library. <br>
 
 ## Todo
-ESP32 version
+ESP32 version <br>
 HwSpi version for arduino with psx hwspi
