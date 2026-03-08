@@ -33,37 +33,7 @@ const boolean UseLeftJoystick = true;
 const boolean InvertLeftYAxis = false;
 const boolean UseRightJoystick = true;
 const boolean InvertRightYAxis = false;
-
 const boolean UseTriggerButtons = false;
-
-const int ADC_Max = 1023;
-
-//buttom
-const int Pin_ButtonA = PSB_CROSS; //PSB_CROSS
-const int Pin_ButtonB = PSB_CIRCLE;
-const int Pin_ButtonX = PSB_SQUARE;
-const int Pin_ButtonY = PSB_TRIANGLE;
-const int Pin_ButtonLB = PSB_L1;
-const int Pin_ButtonRB = PSB_R1;
-const int Pin_ButtonL3 = PSB_L3;
-const int Pin_buttonR3 = PSB_R3;
-const int Pin_ButtonBack = PSB_SELECT;
-const int Pin_ButtonStart = PSB_START;
-const int Pin_DpadUp = PSB_PAD_UP;
-const int Pin_DpadDown = PSB_PAD_DOWN;
-const int Pin_DpadLeft = PSB_PAD_LEFT;
-const int Pin_DpadRight = PSB_PAD_RIGHT;
-
-//stick pins
-const int Pin_RightJoyX = PSS_RX;
-const int Pin_RightJoyY = PSS_RY;
-const int Pin_LeftJoyX = PSS_LX;
-const int Pin_LeftJoyY = PSS_LY;
-
-//trigure pin?
-const int Pin_TriggerL = PSAB_L2; //PSAB - analog button output
-const int Pin_TriggerR = PSAB_R2;
-
 
 const int NumButtons = 14;
 const int Buttons[NumButtons] = {
@@ -104,7 +74,7 @@ Serial.begin(57600);
 
   XInput.setReceiveCallback(rumbleCallback);
 
-  XInput.setTriggerRange(0, ADC_Max);
+  XInput.setTriggerRange(0, 1023);
   XInput.begin();
 
 delay(350); //example code has delay to allow wireless ps2 modules time to start up, will keep even though i dont have any wireless
@@ -174,24 +144,25 @@ if(error == 1)
 
 ps2x.read_gamepad(); //moved stuff but probably wont work but it doesnt give me errors
 
+	// int --> bool
   boolean buttonA = digitalRead(PSB_CROSS); //i dont think i need to make 16 billion differnt consts if setting buttonA to the ps2x button directly will work
-	boolean buttonB = digitalRead(Pin_ButtonB);
-	boolean buttonX = digitalRead(Pin_ButtonX);
-	boolean buttonY = digitalRead(Pin_ButtonY);
+	boolean buttonB = digitalRead(PSB_CIRCLE); //it lowk might not work cause this reads bool not int??
+	boolean buttonX = digitalRead(PSB_SQUARE);
+	boolean buttonY = digitalRead(PSB_TRIANGLE);
 
-	boolean buttonLB = digitalRead(Pin_ButtonLB);
-	boolean buttonRB = digitalRead(Pin_ButtonRB);
+	boolean buttonLB = digitalRead(PSB_L1);
+	boolean buttonRB = digitalRead(PSB_L2);
 
-	boolean buttonBack  = digitalRead(Pin_ButtonBack);
-	boolean buttonStart = digitalRead(Pin_ButtonStart);
+	boolean buttonBack  = digitalRead(PSB_SELECT);
+	boolean buttonStart = digitalRead(PSB_START);
 
-	boolean buttonL3 = digitalRead(Pin_ButtonL3);
-	boolean buttonR3 = digitalRead(Pin_buttonR3);
+	boolean buttonL3 = digitalRead(PSB_L3);
+	boolean buttonR3 = digitalRead(PSB_R3);
 
-	boolean dpadUp    = digitalRead(Pin_DpadUp);
-	boolean dpadDown  = digitalRead(Pin_DpadDown);
-	boolean dpadLeft  = digitalRead(Pin_DpadLeft);
-	boolean dpadRight = digitalRead(Pin_DpadRight);
+	boolean dpadUp    = digitalRead(PSB_PAD_UP);
+	boolean dpadDown  = digitalRead(PSB_PAD_DOWN);
+	boolean dpadLeft  = digitalRead(PSB_PAD_LEFT);
+	boolean dpadRight = digitalRead(PSB_PAD_RIGHT);
 
 	XInput.setButton(BUTTON_A, buttonA); //maybe i could even move PSB_CROSS to here, but i cant test this yet
 	XInput.setButton(BUTTON_B, buttonB);
@@ -209,18 +180,18 @@ ps2x.read_gamepad(); //moved stuff but probably wont work but it doesnt give me 
 
   XInput.setDpad(dpadUp, dpadDown, dpadLeft, dpadRight);
 
-  int trigleftt = analogRead(Pin_TriggerL);
-  int trigright = analogRead(Pin_TriggerR);
+  int trigleftt = analogRead(PSAB_L2);
+  int trigright = analogRead(PSAB_R2);
   XInput.setTrigger(TRIGGER_LEFT, trigleftt);
   XInput.setTrigger(TRIGGER_RIGHT, trigright);
 
-  int rJX = analogRead(Pin_RightJoyX);
-  int rJY = analogRead(Pin_RightJoyY);
+  int rJX = analogRead(PSS_RX);
+  int rJY = analogRead(PSS_RY);
   XInput.setJoystickX(JOY_RIGHT, rJX);
   XInput.setJoystickY(JOY_RIGHT, rJY);
 
-  int lJX = analogRead(Pin_LeftJoyX);
-  int lJY = analogRead(Pin_LeftJoyY);
+  int lJX = analogRead(PSS_RX);
+  int lJY = analogRead(PSS_RY);
   XInput.setJoystickX(JOY_LEFT, lJX);
   XInput.setJoystickY(JOY_LEFT, lJY);
 
@@ -231,4 +202,3 @@ ps2x.read_gamepad(); //moved stuff but probably wont work but it doesnt give me 
 
   XInput.send();
 }
-
