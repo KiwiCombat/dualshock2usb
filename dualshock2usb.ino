@@ -31,10 +31,7 @@ const boolean UseLeftJoystick = true;
 const boolean InvertLeftYAxis = false;
 const boolean UseRightJoystick = true;
 const boolean InvertRightYAxis = false;
-
 const boolean UseTriggerButtons = false;
-
-const int ADC_Max = 1023;
 
 boolean haveController = false;
 
