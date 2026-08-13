@@ -1,3 +1,7 @@
+# ⚠️ I DONT KNOW IF THIS WORKS YET ⚠️
+
+
+
 # dualshock2usb
 
 dualshock2usb is a project that will enable the use of DualShock 2 controllers on windows via an Arduino and XInput.
